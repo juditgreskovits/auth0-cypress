@@ -8,7 +8,7 @@
     "dev": "nodemon -r dotenv/config index.js",
     "start:mock-auth-server": "node mock-auth-server/index.js --port 8443 --callbackUrl=http://local-kapotasana.com:8081/callback",
     "cypress:open": "cypress open",
-    "start:test": "AUTH0_DOMAIN=127.0.0.1:8443 PORT=8081 ./node_modules/.bin/redrun -p start:mock-auth-server start"
+    "start:test": "AUTH0_DOMAIN=127.0.0.1:8443 PORT=8081 redrun -p start:mock-auth-server start"
   },
   "author": "",
   "license": "ISC",

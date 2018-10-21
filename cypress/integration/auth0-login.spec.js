@@ -1,4 +1,4 @@
-describe('Logging In with Auth0', function() {
+describe('Auth0 login', function() {
   context('Use "logginInWithAuth0" command to login', function() {
     it('is not logged in', function() {
       // smoke test just to show that without logging in we cannot
@@ -6,7 +6,7 @@ describe('Logging In with Auth0', function() {
       cy.get('h1').should('contain', 'Please log in!');
     });
 
-    it('can authenticate with cy.request', function() {
+    it('authenticates with cy.request', function() {
       // this automatically gets + sets cookies on the browser
       // and follows all of the redirects that ultimately get
       // us to /home

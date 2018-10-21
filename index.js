@@ -32,11 +32,11 @@ app.use(passport.session());
 
 app.get('/',
   (req, res) => req.user
-    ? res.send(`<div style="text-align: center; font-family: sans-serif">
+    ? res.send(`<div style="text-align: center; font-family: sans-serif;">
       <h1>Welcome ${req.user._json.given_name}!</h1>
       <p>Your email is ${req.user._json.email}</p>
       </div>`)
-    : res.send(`<div style="text-align: center; font-family: sans-serif">
+    : res.send(`<div style="text-align: center; font-family: sans-serif;">
       <h1>Please log in!</h1>
       <div><a href="/login" style="padding: 10px; border: 1px solid grey; color: black; text-decoration: none;">Press me!</a></div>
       </div>`));
