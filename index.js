@@ -5,15 +5,18 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 const strategy = new Auth0Strategy({
   domain: process.env.AUTH0_DOMAIN,
   clientID: process.env.AUTH0_CLIENT_ID,
   clientSecret: process.env.AUTH0_CLIENT_SECRET,
+  state: false,
   callbackURL:  '/callback',
-}, (accessToken, refreshToken, extraParams, profile, done) =>
-  done(null, profile));
+}, (accessToken, refreshToken, extraParams, profile, done) => {
+    return done(null, profile);
+});
+
 
 passport.serializeUser((user, done) => { done(null, user); });
 passport.deserializeUser((user, done) => { done(null, user); });
@@ -29,9 +32,14 @@ app.use(passport.session());
 
 app.get('/',
   (req, res) => req.user
-    ? res.send(`<h1>Hello ${req.user.name.givenName}!</h1>`)
-    : res.send(`<h1>Hello world!</h1>
-      <div><a href="/login">Login</a></div>`));
+    ? res.send(`<div style="text-align: center; font-family: sans-serif">
+      <h1>Welcome ${req.user._json.given_name}!</h1>
+      <p>Your email is ${req.user._json.email}</p>
+      </div>`)
+    : res.send(`<div style="text-align: center; font-family: sans-serif">
+      <h1>Please log in!</h1>
+      <div><a href="/login" style="padding: 10px; border: 1px solid grey; color: black; text-decoration: none;">Press me!</a></div>
+      </div>`));
 
 app.get('/callback',
   passport.authenticate('auth0', { failureRedirect: '/login' }),
@@ -46,6 +54,6 @@ app.listen(port, err => {
     console.log(err);
   }
   else {
-    console.info(`==> app listening on 127.0.0.0:${port}`);
+    console.info(`==> app listening on http://local-kapotasana.com:${port}`);
   }
 });

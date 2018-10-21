@@ -1,0 +1,4 @@
+{
+  "baseUrl": "http://local-kapotasana.com:8081",
+  "chromeWebSecurity": false
+}

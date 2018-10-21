@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node -r dotenv/config index.js",
     "dev": "nodemon -r dotenv/config index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:mock-auth-server": "node mock-auth-server/index.js --port 8443 --callbackUrl=http://local-kapotasana.com:8081/callback",
+    "cypress:open": "cypress open",
+    "start:test": "AUTH0_DOMAIN=127.0.0.1:8443 PORT=8081 ./node_modules/.bin/redrun -p start:mock-auth-server start"
   },
   "author": "",
   "license": "ISC",
@@ -15,8 +17,13 @@
     "dotenv": "6.1.0",
     "express": "4.16.4",
     "express-session": "1.15.6",
+    "morgan": "1.9.1",
     "nodemon": "1.18.4",
     "passport": "0.4.0",
     "passport-auth0": "1.0.0"
+  },
+  "devDependencies": {
+    "cypress": "3.1.0",
+    "redrun": "7.0.2"
   }
 }
